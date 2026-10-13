@@ -3,13 +3,13 @@
 cd "$(dirname "$0")"
 T=$(grep '^GITHUB_TOKEN_POLINA=' ~/.claude/secrets/tokens.env | cut -d= -f2)
 API=https://api.github.com/repos/polinaprema22-ai/victorias-aroma/pages
-for i in $(seq 1 120); do
+for i in $(seq 1 360); do
   ip=$(dig +short @8.8.8.8 victorias-aroma.ru A | head -1)
   echo "$(date '+%H:%M') dns: ${ip:-нет}"
   [[ "$ip" == 185.199.* ]] && break
   sleep 120
 done
-[[ "$ip" == 185.199.* ]] || { echo "Домен так и не заработал за 4 часа"; exit 1; }
+[[ "$ip" == 185.199.* ]] || { echo "Домен так и не заработал за 12 часов"; exit 1; }
 echo "victorias-aroma.ru" > docs/CNAME
 ./publish.sh
 sleep 60
